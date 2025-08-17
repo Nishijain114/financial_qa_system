@@ -1,0 +1,32 @@
+Acme Tech Ltd. – Annual Report 2023
+
+    Executive Summary
+    In 2023, Acme Tech Ltd. delivered resilient performance with revenue of $4.13 billion USD.
+    The company continued investments in R&D and go-to-market execution, while maintaining healthy cash flows.
+
+    Consolidated Income Statement (USD, billions)
+    - Revenue: $4.13
+    - Cost of Goods Sold (COGS): $1.73
+    - Operating Expenses (OPEX): $1.12
+    - Net Income: $1.28
+    - Earnings Per Share (EPS): $2.31
+
+    Consolidated Balance Sheet (USD, billions)
+    - Total Assets: $6.8
+    - Total Liabilities: $3.1
+    - Shareholders' Equity: $3.7
+    - Cash & Cash Equivalents: $0.62
+
+    Headcount and Operations
+    - Total Employees: 5120
+    - Geographic footprint: North America (55%), EMEA (26%), APAC (19%).
+
+    Revenue by Segment
+    - Cloud Services: approximately 47% of total revenue.
+- Hardware: approximately 33% of total revenue.
+- Subscriptions: approximately 20% of total revenue.
+
+    Additional Disclosures
+    - Capital Expenditures: $0.5B
+    - Free Cash Flow: $0.78B
+    - Deferred revenue grew by 6% year-over-year.

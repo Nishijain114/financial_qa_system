@@ -1,0 +1,33 @@
+# Core
+pandas
+numpy
+scikit-learn
+tqdm
+unidecode
+regex
+nltk
+datasets
+
+# Retrieval
+faiss-cpu
+rank-bm25
+sentence-transformers
+
+# Generation & Fine-tuning
+torch
+transformers
+accelerate
+peft
+bitsandbytes; platform_system == "Linux"
+
+# Parsing
+pdfplumber
+pymupdf
+beautifulsoup4
+
+# UI
+streamlit
+gradio
+
+# Optional
+tiktoken
