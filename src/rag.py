@@ -73,12 +73,12 @@ def retrieve(state, query: str, top_k_dense=DENSE_TOP_K, top_k_sparse=SPARSE_TOP
     # normalize to [0,1]
     if dense_hits:
         d_scores = np.array([h[0] for h in dense_hits])
-        d_norm = (d_scores - d_scores.min()) / (d_scores.ptp()+1e-6)
+        d_norm = (d_scores - d_scores.min()) / (np.ptp(d_scores)+1e-6)
     else:
         d_norm = np.array([])
     if sparse_hits:
         s_scores = np.array([h[0] for h in sparse_hits])
-        s_norm = (s_scores - s_scores.min()) / (s_scores.ptp()+1e-6)
+        s_norm = (s_scores - s_scores.min()) / (np.ptp(s_scores)+1e-6)
     else:
         s_norm = np.array([])
 
