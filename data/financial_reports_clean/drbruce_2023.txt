@@ -1,0 +1,53 @@
+===== STATEMENT OF FINANCIAL ACTIVITIES (2022/23) =====
+Donated services: £1,000
+Investment income: £499
+Refunds received: £0
+Total Income and Endowments: £1,499
+
+Management Fees: £143
+Charitable Activities: £80
+Audit Fees: £1,000
+Total Expenditure: £1,223
+
+Net Income: £276
+Net Loss on Investments: -£851
+Net Movement in Funds: -£575
+Total Funds carried forward: £20,311
+
+
+===== BALANCE SHEET (As at 31 March 2023) =====
+Investments: £12,758
+Debtors: £7,553
+Creditors: £0
+Total Net Assets: £20,311
+Unrestricted Funds: £20,311
+
+
+===== NOTES TO THE FINANCIAL STATEMENTS (2022/23) =====
+Investment Income:
+  - Dividends (equities): £330
+  - Interest on cash deposits: £169
+  - Total: £499
+
+Refunds Received:
+  - £0
+
+Investment Management Costs:
+  - Fees: £143
+
+Costs of Charitable Activities:
+  - Grants of £40 made to 2 individuals: £80
+
+Investments – Movement in Market Value:
+  - Market Value at 1 April: £13,714
+  - Profits from Sales: £1,284
+  - Net loss on revaluations: -£2,135
+  - Net Loss overall: -£851
+  - Management Fees deducted: -£105
+  - Market Value at 31 March: £12,758
+
+Debtors:
+  - Other Debtors: £7,553
+
+Analysis of Charitable Funds:
+  - Closing Balance: £20,311

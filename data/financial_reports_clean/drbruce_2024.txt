@@ -1,0 +1,51 @@
+===== STATEMENT OF FINANCIAL ACTIVITIES (2023/24) =====
+Donated services: £1,000
+Investment income: £596
+Total Income and Endowments: £1,596
+
+Management Fees: £146
+Charitable Activities: £1,465
+Audit Fees: £1,000
+Total Expenditure: £2,611
+
+Net Income (Expenditure): -£1,015
+Net Gains on Investments: £950
+Net Movement in Funds: -£65
+Total Funds carried forward: £20,246
+
+
+===== BALANCE SHEET (As at 31 March 2024) =====
+Investments: £13,631
+Debtors: £7,800
+Creditors: £1,185
+Total Net Assets: £20,246
+Unrestricted Funds: £20,246
+
+
+===== NOTES TO THE FINANCIAL STATEMENTS (2023/24) =====
+Investment Income:
+  - Dividends (equities): £324
+  - Interest on cash deposits: £272
+  - Total: £596
+
+Investment Management Costs:
+  - Fees: £146
+
+Costs of Charitable Activities:
+  - Grants of £40 each to 7 individuals: £280
+  - Grant for flood damage restoration: £1,185
+  - Total: £1,465
+
+Investments – Movement in Market Value:
+  - Market Value at 1 April: £12,758
+  - Profits from Sales: £938
+  - Net gain on revaluations: £12
+  - Net Gain overall: £950
+  - Management Fees deducted: -£77
+  - Market Value at 31 March: £13,631
+
+Debtors:
+  - Other Debtors: £7,800
+
+Analysis of Charitable Funds:
+  - Closing Balance: £20,246
