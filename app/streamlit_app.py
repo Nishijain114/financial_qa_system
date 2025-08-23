@@ -42,10 +42,14 @@ with col1:
             if not model_dir.exists():
                 st.error("Fine-tuned model not found. Please run fine-tuning first (see README).")
             else:
-                ans = generate_answer_ft(model_dir, query)
+                import time
+                start_time = time.time()
+                ans, conf = generate_answer_ft(model_dir, query, return_confidence=True)
+                latency = time.time() - start_time
+
                 st.subheader("Answer (Fine-Tuned)")
                 st.write(ans)
-                st.metric("Confidence", "—")
-                st.metric("Latency (s)", "—")
+                st.metric("Confidence", f"{conf:.2f}")
+                st.metric("Latency (s)", f"{latency:.2f}")
 with col2:
     st.info("Use the sidebar to switch between **RAG** and **FT**. The RAG mode shows retrieved context and applies guardrails. FT requires you to run the fine-tuning script first to produce a model at `reports/ft_model/`.")
