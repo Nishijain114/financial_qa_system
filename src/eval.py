@@ -3,20 +3,32 @@ from typing import Dict, List
 import pandas as pd
 from pathlib import Path
 
+_CURRENCY = r"[\$£€]?"
+
+def _norm_num(s: str) -> List[float]:
+    s = s.replace(",", "")
+    # handle parentheses as negative
+    parts = re.findall(rf"{_CURRENCY}\(?-?\d+(?:\.\d+)?\)?", s)
+    out: List[float] = []
+    for p in parts:
+        neg = p.startswith("-") or (p.startswith("(") and p.endswith(")"))
+        p = p.strip("$£€()")
+        try:
+            v = float(p)
+            out.append(-v if neg else v)
+        except:
+            continue
+    return out
+
 def numeric_close(a: str, b: str, tol=0.02) -> bool:
-    # tolerate small numeric differences; extract first numeric
-    import re
-    nums_a = re.findall(r"\d+(?:\.\d+)?", a)
-    nums_b = re.findall(r"\d+(?:\.\d+)?", b)
+    nums_a = _norm_num(a)
+    nums_b = _norm_num(b)
     if not nums_a or not nums_b:
         return a.strip().lower() == b.strip().lower()
-    try:
-        va = float(nums_a[0]); vb = float(nums_b[0])
-        if vb == 0:
-            return va == 0
-        return abs(va - vb)/max(1.0, abs(vb)) <= tol
-    except:
-        return a.strip().lower() == b.strip().lower()
+    va, vb = nums_a[0], nums_b[0]
+    if vb == 0:
+        return va == 0
+    return abs(va - vb)/max(1.0, abs(vb)) <= tol
 
 def evaluate_system(qa_df: pd.DataFrame, infer_fn, system_name: str) -> pd.DataFrame:
     rows = []
