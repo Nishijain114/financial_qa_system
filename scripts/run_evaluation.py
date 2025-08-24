@@ -1,4 +1,3 @@
-import time
 from pathlib import Path
 import pandas as pd
 import sys
@@ -39,7 +38,9 @@ def main():
     qa_df = load_qa_csv(QA_PATH)
 
     # Build or load RAG state (cached)
-    print("Loading/building corpus and indices (with cache)...")
+    print("\n" + "="*60)
+    print("Loading/Building Corpus and Indices (with cache)...")
+    print("="*60)
     state = initialize_state()
 
     # Prepare inference functions
@@ -48,7 +49,9 @@ def main():
         return {"answer": r.get("answer", ""), "confidence": r.get("confidence", 1.0), "latency": r.get("latency", 0)}
 
     # Fine-tune FT model
-    print("Fine-tuning FT model with LoRA (RAFT enabled)...")
+    print("\n" + "="*60)
+    print("Fine-tuning FT Model with LoRA (RAFT enabled)...")
+    print("="*60)
     FT_OUT.mkdir(parents=True, exist_ok=True)
     finetune_lora(qa_df, FT_OUT, epochs=1, lr=2e-4, bs=4, state=state)
 
@@ -57,27 +60,43 @@ def main():
         return {"answer": ans_text, "confidence": conf, "latency": 0}
 
     # Mandatory 3 official tests
+    print("\n" + "="*60)
+    print("Official Sanity Tests")
+    print("="*60)
     official = [
         ("Relevant, high-confidence", "What was the company’s revenue in 2024?"),
         ("Relevant, low-confidence", "How many unique products were sold?"),
         ("Irrelevant", "What is the capital of France?"),
     ]
-    print("\n=== Official Tests ===")
     for label, q in official:
         r = rag_infer(q)
-        print(f"[RAG] {label} :: {q}\n -> {r['answer']} (conf={r['confidence']:.2f}, {r['latency']:.2f}s)")
         a = ft_infer(q)
-        print(f"[FT ] {label} :: {q}\n -> {a['answer']} (conf={a['confidence']:.2f}, {a['latency']:.2f}s)")
+        print(f"\n{label}\nQ: {q}")
+        print(f"   [RAG] -> {r['answer']}   (conf={r['confidence']:.2f}, {r['latency']:.2f}s)")
+        print(f"   [FT ] -> {a['answer']}   (conf={a['confidence']:.2f}, {a['latency']:.2f}s)")
 
-    # Extended evaluation (10+ questions)
-    print("\nRunning extended evaluation...")
+    # Extended evaluation
+    print("\n" + "="*60)
+    print("Extended Evaluation (20 samples)")
+    print("="*60)
     eval_rag = evaluate_system(qa_df.head(20), rag_infer, "RAG")
     eval_ft = evaluate_system(qa_df.head(20), ft_infer, "Fine-Tune (RAFT)")
+
     out = pd.concat([eval_rag, eval_ft], axis=0).reset_index(drop=True)
     out.to_csv("reports/results.csv", index=False)
-    print("Saved: reports/results.csv")
-    print(out.head())
 
+    print("\n" + "="*60)
+    print("Results saved to: reports/results.csv")
+    print("="*60)
+
+    # Final leaderboard
+    rag_acc = (eval_rag["Correct (Y/N)"] == "Y").mean() * 100
+    ft_acc = (eval_ft["Correct (Y/N)"] == "Y").mean() * 100
+    print("\nLeaderboard (Accuracy)")
+    print("-"*60)
+    print(f"RAG        : {rag_acc:.2f}%")
+    print(f"Fine-Tuned : {ft_acc:.2f}%")
+    print("-"*60)
 
 if __name__ == "__main__":
     main()

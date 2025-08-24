@@ -7,11 +7,9 @@ from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
 import faiss
 import os, warnings, transformers
-
-os.environ["TRANSFORMERS_VERBOSITY"] = "error"
-warnings.filterwarnings("ignore", category=UserWarning)
-transformers.logging.set_verbosity_error()
-
+from transformers import AutoTokenizer, AutoModelForCausalLM
+from transformers import AutoModelForSequenceClassification
+import torch
 from .config import (COMPANY_DIR, CHUNK_SIZES, CHUNK_OVERLAP, EMBEDDING_MODEL,
                      DENSE_TOP_K, SPARSE_TOP_K, FUSION_ALPHA, GEN_MODEL,
                      MAX_CONTEXT_DOCS, ENABLE_INPUT_GUARDRAIL, ENABLE_OUTPUT_NUMERIC_CHECK,
@@ -21,9 +19,9 @@ from .config import (COMPANY_DIR, CHUNK_SIZES, CHUNK_OVERLAP, EMBEDDING_MODEL,
 from .config import ADD_CURRENCY_WHEN_MISSING, DEFAULT_CURRENCY_SYMBOL, SOFT_INPUT_GUARDRAIL
 from .data_prep import load_texts_from_dir, segment_into_sections, make_chunks, preprocess_query
 
-from transformers import AutoTokenizer, AutoModelForCausalLM
-from transformers import AutoModelForSequenceClassification
-import torch
+os.environ["TRANSFORMERS_VERBOSITY"] = "error"
+warnings.filterwarnings("ignore", category=UserWarning)
+transformers.logging.set_verbosity_error()
 
 # -------------------------
 # Corpus & Indexing
@@ -429,8 +427,8 @@ def load_generator():
         return _GEN_CACHE["tok"], _GEN_CACHE["model"], _GEN_CACHE["device"]
     tok = AutoTokenizer.from_pretrained(GEN_MODEL)
     model = AutoModelForCausalLM.from_pretrained(GEN_MODEL)
-    device = torch.device("mps" if torch.backends.mps.is_available() else ("cuda" if torch.cuda.is_available() else "cpu"))
-    model = model.to(device)
+    #device = torch.device("mps" if torch.backends.mps.is_available() else ("cuda" if torch.cuda.is_available() else "cpu"))
+    #model = model.to(device)
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
     if CACHE_GENERATOR_IN_MEMORY:

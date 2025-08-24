@@ -1,4 +1,4 @@
-import re, os, math, json
+import re
 from pathlib import Path
 from typing import List, Dict, Tuple
 import pdfplumber
@@ -7,6 +7,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 from unidecode import unidecode
 from nltk.corpus import stopwords
+from typing import Dict
 
 STOPWORDS = set()
 try:
@@ -67,9 +68,6 @@ def clean_text(text: str) -> str:
     text = re.sub(r'[ \t]+', ' ', text)
     text = re.sub(r'\n{2,}', '\n', text)
     return text.strip()
-
-import re
-from typing import Dict
 
 def segment_into_sections(text: str) -> Dict[str, str]:
     """
