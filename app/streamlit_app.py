@@ -8,9 +8,9 @@ from src.rag import initialize_state, answer_query, retrieve, extract_metric_val
 from src.ft import generate_answer_ft
 from src.config import DEFAULT_MODE
 
-st.set_page_config(page_title="Financial QA: RAG vs Fine-Tune", layout="wide")
+st.set_page_config(page_title="Financial RAG vs Fine-Tuning", layout="wide")
 
-st.title("📊 Comparative Financial QA — RAG vs Fine-Tuning")
+st.title("Financial RAG vs Fine-Tuning")
 st.caption("Open-source only • Same data • Confidence, latency, robustness")
 
 @st.cache_resource(show_spinner=True)
@@ -23,7 +23,7 @@ use_reranker = st.sidebar.checkbox("Use cross-encoder reranker", value=True)
 top_k_dense = st.sidebar.slider("Dense top_k", 1, 20, 6)
 top_k_sparse = st.sidebar.slider("Sparse top_k", 1, 20, 6)
 alpha = st.sidebar.slider("Fusion alpha (dense weight)", 0.0, 1.0, 0.5, 0.05)
-query = st.text_input("Enter your question about the financial statements:", "What was the company’s revenue in 2024?")
+query = st.text_input("Enter your question about the financial statements:", "How much was the investment income in 2022/23?")
 
 col1, col2 = st.columns(2)
 with col1:

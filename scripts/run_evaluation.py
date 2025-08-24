@@ -64,7 +64,7 @@ def main():
     print("Official Sanity Tests")
     print("="*60)
     official = [
-        ("Relevant, high-confidence", "What was the company’s revenue in 2024?"),
+        ("Relevant, high-confidence", "How much was the investment income in 2022/23?"),
         ("Relevant, low-confidence", "How many unique products were sold?"),
         ("Irrelevant", "What is the capital of France?"),
     ]
