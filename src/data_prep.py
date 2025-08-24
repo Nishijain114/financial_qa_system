@@ -68,20 +68,30 @@ def clean_text(text: str) -> str:
     text = re.sub(r'\n{2,}', '\n', text)
     return text.strip()
 
+import re
+from typing import Dict
+
 def segment_into_sections(text: str) -> Dict[str, str]:
-    # naive segmentation by common financial headers
+    """
+    Segment financial text into sections based on headings.
+    """
     sections = {}
+
+    # Patterns for your raw data
     patterns = [
+        ("statement_of_financial_activities", r"===== STATEMENT OF FINANCIAL ACTIVITIES.*=====", re.I),
+        ("balance_sheet", r"===== BALANCE SHEET.*=====", re.I),
+        ("notes", r"===== NOTES TO THE FINANCIAL STATEMENTS.*=====", re.I),
         ("income_statement", r"(income statement|statement of operations)", re.I),
-        ("balance_sheet", r"(balance sheet|statement of financial position)", re.I),
         ("cash_flow", r"(cash flow|cashflow|statement of cash flows)", re.I),
         ("equity", r"(shareholders' equity|equity)", re.I),
         ("management_discussion", r"(management discussion|md&a|management's discussion)", re.I),
     ]
-    # split into lines to search regions
+
     lines = text.splitlines()
     current = "general"
     sections[current] = []
+
     for line in lines:
         matched = False
         for name, pat, flags in patterns:
@@ -92,7 +102,10 @@ def segment_into_sections(text: str) -> Dict[str, str]:
                 matched = True
                 break
         sections[current].append(line)
+
+    # Join lines for each section
     return {k: "\n".join(v).strip() for k, v in sections.items()}
+
 
 def tokenize_words(text: str) -> List[str]:
     return re.findall(r"\w+(?:'\w+)?", text)

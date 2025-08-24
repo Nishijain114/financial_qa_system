@@ -6,6 +6,11 @@ from sklearn.feature_extraction.text import TfidfVectorizer
 from rank_bm25 import BM25Okapi
 from sentence_transformers import SentenceTransformer
 import faiss
+import os, warnings, transformers
+
+os.environ["TRANSFORMERS_VERBOSITY"] = "error"
+warnings.filterwarnings("ignore", category=UserWarning)
+transformers.logging.set_verbosity_error()
 
 from .config import (COMPANY_DIR, CHUNK_SIZES, CHUNK_OVERLAP, EMBEDDING_MODEL,
                      DENSE_TOP_K, SPARSE_TOP_K, FUSION_ALPHA, GEN_MODEL,
