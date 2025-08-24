@@ -427,8 +427,8 @@ def load_generator():
         return _GEN_CACHE["tok"], _GEN_CACHE["model"], _GEN_CACHE["device"]
     tok = AutoTokenizer.from_pretrained(GEN_MODEL)
     model = AutoModelForCausalLM.from_pretrained(GEN_MODEL)
-    #device = torch.device("mps" if torch.backends.mps.is_available() else ("cuda" if torch.cuda.is_available() else "cpu"))
-    #model = model.to(device)
+    device = torch.device("mps" if torch.backends.mps.is_available() else ("cuda" if torch.cuda.is_available() else "cpu"))
+    model = model.to(device)
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
     if CACHE_GENERATOR_IN_MEMORY:
