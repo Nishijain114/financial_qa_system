@@ -1,4 +1,4 @@
-# Group_XX_RAG_vs_FT — Comparative Financial QA (RAG vs Fine-Tuning)
+# Group_24_RAG_vs_FT — Comparative Financial QA (RAG vs Fine-Tuning)
 
 This repo scaffolds your Assignment 2 end-to-end:
 - Data collection & preprocessing (PDF/HTML/Excel → clean text → sections → chunks)
@@ -25,14 +25,18 @@ streamlit run app/streamlit_app.py
 ## How to use with your own data
 
 1. Put your last-two-years financial statements (PDF/HTML/Excel/TXT) under `data/your_company/`.
-2. Run `scripts/run_evaluation.py` once to build indices (FAISS + BM25) and cache embeddings.
+2. Run `scripts/run_evaluation.py` once to build/load indices (FAISS + BM25) and cache embeddings.
 3. Edit `qa/qa_seed.csv` to use your ~50 real Q/A pairs.
 4. Re-run the evaluation and take screenshots for the report.
 
 ## Advanced Techniques
 
-- **RAG**: By default, uses **Hybrid Search (Sparse + Dense)**. Change `ADVANCED_RAG_TECHNIQUE` in `src/config.py` per your group number mod 5.
-- **Fine-Tuning**: By default, uses **Adapter/LoRA**. Change `ADVANCED_FT_TECHNIQUE` in `src/config.py` per your group number mod 5.
+- **RAG (Group 24 → 24 % 5 = 4): Hybrid Search (Sparse + Dense)** implemented with BM25 + SentenceTransformer + FAISS and score fusion; cached indices in `.cache/rag_indices`.
+- **Fine-Tuning (Group 24 → 24 % 5 = 4): Retrieval-Augmented Fine-Tuning (RAFT)** — training prompts include retrieved contexts; inference optionally uses retrieval too.
+
+Engineering improvements:
+- Cached indices and generator with strict token budgeting.
+- Robust numeric guardrail and evaluation numeric comparison.
 
 ## Submission
 - Zip the folder as `Group_<Number>_RAG_vs_FT.zip` (script auto-creates one as `reports/submission.zip`).
@@ -41,8 +45,8 @@ streamlit run app/streamlit_app.py
 - Provide a hosted link (Streamlit Community Cloud / local tunnel).
 
 ## Models (all open-source)
-- Embeddings: `sentence-transformers/all-MiniLM-L6-v2` (default), switchable to `intfloat/e5-small-v2`
+- Embeddings: `sentence-transformers/all-MiniLM-L6-v2`
 - Generator (RAG): `distilgpt2`
-- Fine-tune target: `distilgpt2` (default) with LoRA; switchable in `src/config.py`
+- Fine-tune target: `distilgpt2` with LoRA + RAFT
 
 No proprietary APIs used.
